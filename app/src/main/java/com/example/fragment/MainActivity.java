@@ -7,50 +7,31 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnAddAndroid, btnDeleteAndroid;
+    Button btnSendData;
+    EditText edtInput;
     FragmentManager fragmentManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnAddAndroid = findViewById(R.id.button_add_android_fragment);
-        btnDeleteAndroid = findViewById(R.id.button_delete_android_fragment);
+        btnSendData = findViewById(R.id.button_send_data);
+        edtInput = findViewById(R.id.eidittext_main);
         fragmentManager = getSupportFragmentManager();
 
-        btnAddAndroid.setOnClickListener(new View.OnClickListener() {
+        btnSendData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 AndroidFragment androidFragment = new AndroidFragment();
-                fragmentTransaction.add(R.id.linear_container, androidFragment,"android_fragment");
+                fragmentTransaction.add(R.id.linear_container, androidFragment, "android_fragment");
                 fragmentTransaction.addToBackStack("fragment_android");
                 fragmentTransaction.commit();
             }
         });
-
-        btnDeleteAndroid.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AndroidFragment androidFragment = (AndroidFragment) fragmentManager.findFragmentByTag("android_fragment");
-                if (androidFragment != null) {
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.remove(androidFragment);
-                    fragmentTransaction.commit();
-                }
-            }
-        });
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (fragmentManager.getFragments().size() > 0) {
-            fragmentManager.popBackStack();
-        } else {
-            super.onBackPressed();
-        }
     }
 }
