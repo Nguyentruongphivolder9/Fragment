@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 AndroidFragment androidFragment = new AndroidFragment();
                 fragmentTransaction.add(R.id.linear_container, androidFragment,"android_fragment");
+                fragmentTransaction.addToBackStack("fragment_android");
                 fragmentTransaction.commit();
             }
         });
@@ -42,5 +43,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (fragmentManager.getFragments().size() > 0) {
+            fragmentManager.popBackStack();
+        } else {
+            super.onBackPressed();
+        }
     }
 }
