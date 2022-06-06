@@ -14,12 +14,19 @@ import android.widget.TextView;
 import java.util.Random;
 
 
-public class AndroidFragment extends Fragment {
+public class AndroidFragment extends Fragment implements OnListenParams {
 
     RelativeLayout relativeLayout;
     TextView tvTitle;
     View view;
     Random random;
+    OnListenParams onListenParams;
+
+    public void setOnListenParams(String data) {
+        onListenParams = this;
+        onListenParams.onDataChanges(data);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -28,8 +35,14 @@ public class AndroidFragment extends Fragment {
         relativeLayout = view.findViewById(R.id.relative_android);
         tvTitle = view.findViewById(R.id.text_view_android_fragment);
         random = new Random();
-        relativeLayout.setBackgroundColor(Color.rgb(random.nextInt() + 1,random.nextInt() + 1,random.nextInt() + 1));
+        relativeLayout.setBackgroundColor(Color.rgb(random.nextInt() + 1, random.nextInt() + 1, random.nextInt() + 1));
         return view;
     }
 
+    @Override
+    public void onDataChanges(String data) {
+        if (!data.isEmpty()) {
+            tvTitle.setText(data);
+        }
+    }
 }

@@ -7,25 +7,26 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/eidittext_main"
+        android:id="@+id/edittext_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:hint="Input text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:minHeight="48dp" />
 
     <Button
-        android:layout_marginTop="10dp"
         android:id="@+id/button_send_data"
-        android:text="Send Data Fragment"
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <LinearLayout
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:id="@+id/linear_container"
+        android:text="Send Data Fragment" />
+
+    <fragment
+        android:id="@+id/fragment_android"
+        android:name="com.example.fragment.AndroidFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_android" />
 
 </LinearLayout>

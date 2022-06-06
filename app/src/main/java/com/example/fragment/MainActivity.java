@@ -20,17 +20,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnSendData = findViewById(R.id.button_send_data);
-        edtInput = findViewById(R.id.eidittext_main);
+        edtInput = findViewById(R.id.edittext_main);
         fragmentManager = getSupportFragmentManager();
 
         btnSendData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                AndroidFragment androidFragment = new AndroidFragment();
-                fragmentTransaction.add(R.id.linear_container, androidFragment, "android_fragment");
-                fragmentTransaction.addToBackStack("fragment_android");
-                fragmentTransaction.commit();
+                String input = edtInput.getText().toString();
+                AndroidFragment androidFragment = (AndroidFragment) fragmentManager.findFragmentById(R.id.fragment_android);
+                if (androidFragment != null){
+                    androidFragment.setOnListenParams(input);
+                }
             }
         });
     }
